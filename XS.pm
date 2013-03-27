@@ -42,7 +42,7 @@ values and vice versa.
 
 =over 4
 
-=item * correct Unicode handling
+=item * smart Unicode handling
 
 This module knows how to handle Unicode with Perl version higher than 5.8.5,
 documents how and when it does so, and even documents what "correct" means.

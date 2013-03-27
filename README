@@ -1,6 +1,6 @@
 NAME
-    JSON::XS - JSON::XS for Cpanel, fast and correct serialising,
-    also for 5.6.2
+    JSON::XS - JSON::XS for Cpanel, fast and correct serialising, also for
+    5.6.2
 
 SYNOPSIS
      use JSON::XS;
@@ -33,11 +33,11 @@ DESCRIPTION
 
     See below for the Cpanel fork.
 
-    See MAPPING, below, on how JSON::XS maps perl values to JSON
-    values and vice versa.
+    See MAPPING, below, on how JSON::XS maps perl values to JSON values and
+    vice versa.
 
   FEATURES
-    *   correct Unicode handling
+    *   smart Unicode handling
 
         This module knows how to handle Unicode with Perl version higher
         than 5.8.5, documents how and when it does so, and even documents
@@ -121,10 +121,10 @@ FUNCTIONAL INTERFACE
         Except being faster.
 
     $is_boolean = JSON::XS::is_bool $scalar
-        Returns true if the passed scalar represents either
-        JSON::XS::true or JSON::XS::false, two constants
-        that act like 1 and 0, respectively and are used to represent JSON
-        "true" and "false" values in Perl.
+        Returns true if the passed scalar represents either JSON::XS::true
+        or JSON::XS::false, two constants that act like 1 and 0,
+        respectively and are used to represent JSON "true" and "false"
+        values in Perl.
 
         See MAPPING, below, for more information on how JSON values are
         mapped to Perl.
@@ -629,14 +629,14 @@ INCREMENTAL PARSING
     much more efficient (and can be implemented with a minimum of method
     calls).
 
-    JSON::XS will only attempt to parse the JSON text once it is
-    sure it has enough text to get a decisive result, using a very simple
-    but truly incremental parser. This means that it sometimes won't stop as
-    early as the full parser, for example, it doesn't detect mismatched
-    parentheses. The only thing it guarantees is that it starts decoding as
-    soon as a syntactically valid JSON text has been seen. This means you
-    need to set resource limits (e.g. "max_size") to ensure the parser will
-    stop parsing in the presence if syntax errors.
+    JSON::XS will only attempt to parse the JSON text once it is sure it has
+    enough text to get a decisive result, using a very simple but truly
+    incremental parser. This means that it sometimes won't stop as early as
+    the full parser, for example, it doesn't detect mismatched parentheses.
+    The only thing it guarantees is that it starts decoding as soon as a
+    syntactically valid JSON text has been seen. This means you need to set
+    resource limits (e.g. "max_size") to ensure the parser will stop parsing
+    in the presence if syntax errors.
 
     The following methods implement this incremental parser.
 
@@ -714,8 +714,8 @@ INCREMENTAL PARSING
 
     For example, is the string 1 a single JSON number, or is it simply the
     start of 12? Or is 12 a single JSON number, or the concatenation of 1
-    and 2? In neither case you can tell, and this is why JSON::XS
-    takes the conservative route and disallows this case.
+    and 2? In neither case you can tell, and this is why JSON::XS takes the
+    conservative route and disallows this case.
 
   EXAMPLES
     Some examples will make all this clearer. First, a simple example that
@@ -780,11 +780,11 @@ INCREMENTAL PARSING
     but you cannot load it into memory fully (this has actually happened in
     the real world :).
 
-    Well, you lost, you have to implement your own JSON parser. But
-    JSON::XS can still help you: You implement a (very simple) array
-    parser and let JSON decode the array elements, which are all full JSON
-    objects on their own (this wouldn't work if the array elements could be
-    JSON numbers, for example):
+    Well, you lost, you have to implement your own JSON parser. But JSON::XS
+    can still help you: You implement a (very simple) array parser and let
+    JSON decode the array elements, which are all full JSON objects on their
+    own (this wouldn't work if the array elements could be JSON numbers, for
+    example):
 
        my $json = new JSON::XS;
 
@@ -853,10 +853,10 @@ INCREMENTAL PARSING
     never ran the above example :).
 
 MAPPING
-    This section describes how JSON::XS maps Perl values to JSON
-    values and vice versa. These mappings are designed to "do the right
-    thing" in most circumstances automatically, preserving round-tripping
-    characteristics (what you put in comes out as something equivalent).
+    This section describes how JSON::XS maps Perl values to JSON values and
+    vice versa. These mappings are designed to "do the right thing" in most
+    circumstances automatically, preserving round-tripping characteristics
+    (what you put in comes out as something equivalent).
 
     For the more enlightened: note that in the following descriptions,
     lowercase *perl* refers to the Perl interpreter, while uppercase *Perl*
@@ -899,8 +899,8 @@ MAPPING
 
         Note that precision is not accuracy - binary floating point values
         cannot represent most decimal fractions exactly, and when converting
-        from and to floating point, JSON::XS only guarantees
-        precision up to but not including the leats significant bit.
+        from and to floating point, JSON::XS only guarantees precision up to
+        but not including the leats significant bit.
 
     true, false
         These JSON atoms become "JSON::XS::true" and "JSON::XS::false",
@@ -921,12 +921,12 @@ MAPPING
         ordering in hash keys (or JSON objects), they will usually be
         encoded in a pseudo-random order that can change between runs of the
         same program but stays generally the same within a single run of a
-        program. JSON::XS can optionally sort the hash keys
-        (determined by the *canonical* flag), so the same datastructure will
-        serialise to the same JSON text (given same settings and version of
-        JSON::XS), but this incurs a runtime overhead and is only
-        rarely useful, e.g. when you want to compare some JSON text against
-        another for equality.
+        program. JSON::XS can optionally sort the hash keys (determined by
+        the *canonical* flag), so the same datastructure will serialise to
+        the same JSON text (given same settings and version of JSON::XS),
+        but this incurs a runtime overhead and is only rarely useful, e.g.
+        when you want to compare some JSON text against another for
+        equality.
 
     array references
         Perl array references become JSON arrays.
@@ -953,10 +953,10 @@ MAPPING
 
     simple scalars
         Simple Perl scalars (any scalar that is not a reference) are the
-        most difficult objects to encode: JSON::XS will encode
-        undefined scalars as JSON "null" values, scalars that have last been
-        used in a string context before encoding as JSON strings, and
-        anything else as number value:
+        most difficult objects to encode: JSON::XS will encode undefined
+        scalars as JSON "null" values, scalars that have last been used in a
+        string context before encoding as JSON strings, and anything else as
+        number value:
 
            # dump as number
            encode_json [2]                      # yields [2]
@@ -1159,8 +1159,8 @@ ENCODING/CODESET FLAG NOTES
     configure JSON::XS to output a data structure as valid YAML* that works
     in all cases.
 
-    If you really must use JSON::XS to generate YAML, you should use
-    this algorithm (subject to change in future versions):
+    If you really must use JSON::XS to generate YAML, you should use this
+    algorithm (subject to change in future versions):
 
        my $to_yaml = JSON::XS->new->utf8->space_after (1);
        my $yaml = $to_yaml->encode ($ref) . "\n";
@@ -1172,8 +1172,8 @@ ENCODING/CODESET FLAG NOTES
     keys are noticeably shorter than the 1024 "stream characters" YAML
     allows and that you do not have characters with codepoint values outside
     the Unicode BMP (basic multilingual page). YAML also does not allow "\/"
-    sequences in strings (which JSON::XS does not *currently*
-    generate, but other JSON generators might).
+    sequences in strings (which JSON::XS does not *currently* generate, but
+    other JSON generators might).
 
     There might be other incompatibilities that I am not aware of (or the
     YAML specification has been changed yet again - it does so quite often).
@@ -1226,10 +1226,10 @@ ENCODING/CODESET FLAG NOTES
        1,  0]}
 
     It shows the number of encodes/decodes per second (JSON::XS uses the
-    functional interface, while JSON::XS/2 uses the OO interface
-    with pretty-printing and hashkey sorting enabled, JSON::XS/3
-    enables shrink. JSON::DWIW/DS uses the deserialise function, while
-    JSON::DWIW::FJ uses the from_json method). Higher is better:
+    functional interface, while JSON::XS/2 uses the OO interface with
+    pretty-printing and hashkey sorting enabled, JSON::XS/3 enables shrink.
+    JSON::DWIW/DS uses the deserialise function, while JSON::DWIW::FJ uses
+    the from_json method). Higher is better:
 
        module        |     encode |     decode |
        --------------|------------|------------|
@@ -1335,8 +1335,8 @@ BUGS
     a tracker at github, so you'll have to report any issues twice. Once in
     private to MLEHMANN to be fixed in JSON::XS for the masses and one to
     our the public tracker. Issues fixed by JSON::XS with a new release will
-    also be backported to JSON::XS and 5.6.2, as long as Cpanel
-    relies on 5.6.2 and JSON::XS as our serializer of choice.
+    also be backported to JSON::XS and 5.6.2, as long as Cpanel relies on
+    5.6.2 and JSON::XS as our serializer of choice.
 
     Issues: <https://github.com/bdraco/JSON-XS/issues>
 

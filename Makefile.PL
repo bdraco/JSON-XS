@@ -43,3 +43,23 @@ WriteMakefile(
     SIGN => 1,
 );
 
+package MY;
+
+sub test {
+    local $_ = shift->SUPER::test(@_);
+    s/TEST_FILES = /TEST_FILES = -Mcommon::sense /;
+    $_;
+}
+
+sub top_targets {
+    local $_ = shift->SUPER::top_targets(@_);
+    s/\$\(FIRST_MAKEFILE\) blibdirs/\$(FIRST_MAKEFILE\) blibdirs README/;
+    $_;
+}
+
+sub depend {
+    "
+README : \$(VERSION_FROM)
+	pod2text \$(VERSION_FROM) > README
+"
+}
