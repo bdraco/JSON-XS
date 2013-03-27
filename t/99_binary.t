@@ -5,24 +5,24 @@ sub test($) {
    my $js;
 
    $js = JSON::XS->new->allow_nonref(0)->utf8->ascii->shrink->encode ([$_[0]]);
-   ok ($_[0] eq ((decode_json $js)->[0]), 0);
+   is ($_[0], ((decode_json $js)->[0]), "allow_nonref(0)->utf8->ascii->shrink->encode");
    $js = JSON::XS->new->allow_nonref(0)->utf8->ascii->encode ([$_[0]]);
-   ok ($_[0] eq (JSON::XS->new->utf8->shrink->decode($js))->[0], 1);
+   is ($_[0], (JSON::XS->new->utf8->shrink->decode($js))->[0], "utf8->shrink->decode");
 
    $js = JSON::XS->new->allow_nonref(0)->utf8->shrink->encode ([$_[0]]);
-   ok ($_[0] eq ((decode_json $js)->[0]), 2);
+   is ($_[0], ((decode_json $js)->[0]), "allow_nonref(0)->utf8->shrink->encode");
    $js = JSON::XS->new->allow_nonref(1)->utf8->encode ([$_[0]]);
-   ok ($_[0] eq (JSON::XS->new->utf8->shrink->decode($js))->[0], 3);
+   is ($_[0], (JSON::XS->new->utf8->shrink->decode($js))->[0], "allow_nonref(1)->utf8->encode");
 
    $js = JSON::XS->new->allow_nonref(1)->ascii->encode ([$_[0]]);
-   ok ($_[0] eq JSON::XS->new->decode ($js)->[0], 4);
+   is ($_[0], JSON::XS->new->decode ($js)->[0], "allow_nonref(1)->ascii->encode");
    $js = JSON::XS->new->allow_nonref(0)->ascii->encode ([$_[0]]);
-   ok ($_[0] eq JSON::XS->new->shrink->decode ($js)->[0], 5);
+   is ($_[0], JSON::XS->new->shrink->decode ($js)->[0], "allow_nonref(0)->ascii->encode");
 
    $js = JSON::XS->new->allow_nonref(1)->shrink->encode ([$_[0]]);
-   ok ($_[0] eq JSON::XS->new->decode ($js)->[0], 6);
+   is ($_[0], JSON::XS->new->decode ($js)->[0], "decode");
    $js = JSON::XS->new->allow_nonref(0)->encode ([$_[0]]);
-   ok ($_[0] eq JSON::XS->new->shrink->decode ($js)->[0], 7);
+   is ($_[0], JSON::XS->new->shrink->decode ($js)->[0], "shrink->decode");
 }
 
 srand 0; # doesn't help too much, but its at least more deterministic
