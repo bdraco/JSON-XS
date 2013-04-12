@@ -105,11 +105,7 @@ package JSON::XS;
 
 #use common::sense;
 
-<<<<<<< HEAD
 our $VERSION = '2.33_06';
-=======
-our $VERSION = '2.3305';
->>>>>>> b044826... 2.3305:  t/99_binary.t: non-numeric test names, use is instead of ok
 our @ISA = qw(Exporter);
 
 our @EXPORT = qw(encode_json decode_json to_json from_json);
