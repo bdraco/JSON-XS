@@ -1,4 +1,4 @@
-use Test::More $] < 5.008 ? (tests => 3) : (skip_all => "5.6 only");
+use Test::More $] < 5.008 ? (tests => 4) : (skip_all => "5.6 only");
 use JSON::XS;
 
 my $json = JSON::XS->new;
@@ -13,6 +13,18 @@ my $json = JSON::XS->new;
 
     ok( from_json( to_json($formref) ),
 	"JSON::XS :: round trip untied utf8 with int" );
+}
+
+{
+    my $formref = {
+        'cpanel_apiversion' => 1,
+        'utf8'       => 'română',
+        'func'       => 'phpmyadminlink',
+        'module'     => 'Cgi'
+    };
+
+    ok( from_json( to_json($formref) ),
+	"JSON::XS :: round trip utf8 complex" );
 }
 
 $js  = q|[-12.34]|;

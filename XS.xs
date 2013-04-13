@@ -1688,6 +1688,8 @@ decode_json (SV *string, JSON *json, U8 **offset_return)
     sv_utf8_downgrade (string, 0);
   else
     sv_utf8_upgrade (string);
+#else
+  sv_utf8_upgrade (string);
 #endif
 
   SvGROW (string, SvCUR (string) + 1); // should basically be a NOP
@@ -1748,6 +1750,9 @@ decode_json (SV *string, JSON *json, U8 **offset_return)
   if (!(dec.json.flags & F_ALLOW_NONREF) && !SvROK (sv))
     croak ("JSON text must be an object or array (but found number, string, true, false or null, use allow_nonref to allow this)");
 
+#if PERL_VERSION < 8
+  sv_utf8_downgrade(string, TRUE);
+#endif
   return sv;
 }
 
