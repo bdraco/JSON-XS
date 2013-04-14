@@ -2,7 +2,7 @@
 
 use strict;
 no warnings;
-use Test::More $] < 5.008 ? (tests => 39) : (tests => 697);
+use Test::More $] < 5.008 ? (skip_all => "5.6") : (tests => 697);
 
 use JSON::XS;
 

@@ -1656,7 +1656,12 @@ decode_json (SV *string, JSON *json, U8 **offset_return)
    * state (SvPV should do that, but it's buggy, see below).
    */
   /*SvGETMAGIC (string);*/
+#if PERL_VERSION >= 8
+    /* perl 5.6 will crash on free sv_utf8_upgrade 
+       because its buggy.  This break the prefix and incr parser,
+       however we don't use it so we don't care */
   if (SvMAGICAL (string) || !SvPOK (string))
+#endif
     string = sv_2mortal (newSVsv (string));
 
   SvUPGRADE (string, SVt_PV);

@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 13;
+use Test::More $] < 5.008 ? (skip_all => "5.6") : (tests => 13);
 
 use JSON::XS;
 

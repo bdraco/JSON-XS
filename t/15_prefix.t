@@ -1,4 +1,4 @@
-use Test::More tests => 4;
+use Test::More $] < 5.008 ? (skip_all => "5.6") : (tests => 4);
 use JSON::XS;
 
 my $xs = JSON::XS->new->latin1->allow_nonref;

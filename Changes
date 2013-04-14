@@ -4,6 +4,12 @@ TODO: maybe detect and croak on more invalid inputs (e.g. +-inf/nan)
 TODO: maybe avoid the reblessing and better support readonly objects.
 TODO: http://stevehanov.ca/blog/index.php?id=104 compression
 
+2.33_13 2013-04-14 00:03:10 (bdraco)
+       - Copy the sv on json_decode to prevent
+         crash on utf8 upgrade in 5.6
+
+2.33_12 -- broken
+         
 2.33_11 2013-04-13 01:20:11 (bdraco)
        - Fix utf8 roundtrip under 5.6
 
