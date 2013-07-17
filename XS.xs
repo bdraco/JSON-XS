@@ -1449,6 +1449,10 @@ decode_hv (dec_t *dec)
                   if (!key)
                     goto fail;
 
+#if PERL_VERSION < 8
+                  sv_utf8_downgrade(key, 1);
+#endif
+
                   decode_ws (dec); EXPECT_CH (':');
 
                   decode_ws (dec);
