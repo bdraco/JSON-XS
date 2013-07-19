@@ -1226,8 +1226,12 @@ decode_str (dec_t *dec)
       SvPOK_only (sv);
       *SvEND (sv) = 0;
 
-      if (utf8)
+      if (utf8) {
         SvUTF8_on (sv);
+#if PERL_VERSION < 8
+        sv_utf8_downgrade(sv, 1);
+#endif
+      }
     }
   else
     sv = newSVpvn ("", 0);
@@ -1448,10 +1452,6 @@ decode_hv (dec_t *dec)
                   SV *key = decode_str (dec);
                   if (!key)
                     goto fail;
-
-#if PERL_VERSION < 8
-                  sv_utf8_downgrade(key, 1);
-#endif
 
                   decode_ws (dec); EXPECT_CH (':');
 
